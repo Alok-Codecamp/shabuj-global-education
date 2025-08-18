@@ -1,9 +1,8 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import avatar from "@/assets/avatar.jpg"
+import {useState } from "react";
+
 import { AlignJustify } from "lucide-react";
 
 
@@ -11,15 +10,9 @@ import { AlignJustify } from "lucide-react";
 
 const NavBar = () => {
     const [open, setOpen] = useState(false);
-    const pathname = usePathname();
-    const router = useRouter();
-    const [isMounted, setIsMounted] = useState(false);
-    
-    
-    // handle logout function 
 
     return (
-        <nav className={`md:shadow-sm sticky z-50 top-0 bg-[#F0F8FF] pt-4 pb-4`}>
+        <nav className={`md:shadow-xs sticky z-50 top-0 bg-[#F0F8FF] pt-4 pb-4`}>
 
             {/* desktop menu  */}
             <section className={` container mx-auto pl-2 pr-4  flex justify-between items-center h-20`}>
