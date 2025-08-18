@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://shabuj-global-education.vercel.app/
+
+# Sitemaps
+Sitemap: https://shabuj-global-education.vercel.app/sitemap.xml
