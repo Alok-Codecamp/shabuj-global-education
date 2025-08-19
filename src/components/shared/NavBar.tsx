@@ -81,27 +81,27 @@ const NavBar = () => {
                             : "animate-out slide-out-to-right"
                         }`}
                 >
-                    <div className="">
-                        <input
-                            className="border border-gray-400 rounded-2xl px-2 py-1"
-                            type="text"
-                            placeholder="Search Meals"
-                        />
-                    </div>
-                    <ul className=" text-xl ">
+                    
+                   <ul className=" space-x-4 text-gray-800 font-bold">
                         <li>
-                            <Link href="/find-meals">Find Meals</Link>
+                            <Link href="/">Home</Link>
                         </li>
 
                         <li>
-                            <Link href='/our-cehfs'>Our Chefs</Link>
+                            <Link href='/study-destination'>Study Destination</Link>
+                        </li>
+                        <li>
+                            <Link href={"/services"}>Services</Link>
+                        </li>
+                        <li>
+                            <Link href={"/test-prep"}>Test Prep.</Link>
+                        </li>
+                        <li>
+                            <Link href={"/about"}>About Us</Link>
                         </li>
 
-
-
-                        
                         <li>
-                            <Link href={"about-us"}>About Us</Link>
+                            <Link href={"/about"}>Admin</Link>
                         </li>
                         
                     </ul>
