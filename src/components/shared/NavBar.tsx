@@ -51,7 +51,7 @@ const NavBar = () => {
                         </li>
 
                         <li>
-                            <Link href={"/about"}>Admin</Link>
+                            <Link href={"/admin"}>Admin</Link>
                         </li>
                         
                     </ul>
@@ -101,7 +101,7 @@ const NavBar = () => {
                         </li>
 
                         <li>
-                            <Link href={"/about"}>Admin</Link>
+                            <Link href={"/admin"}>Admin</Link>
                         </li>
                         
                     </ul>

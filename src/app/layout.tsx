@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   openGraph:{
      description:
       "Learn about Shabuj Global Education, our mission, history, and student support services.",
-    url: "https://www.shabujglobal.com",
+    url: "https://shabuj-global-education.vercel.app/",
     siteName: "Shabuj Global Education",
   }
 };
@@ -31,6 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
+         cz-shortcut-listen="true"
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}

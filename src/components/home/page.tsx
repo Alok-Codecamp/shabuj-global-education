@@ -8,6 +8,7 @@ import line from '@/assets/line.png'
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import { CircleCheck } from 'lucide-react';
+
 const HomePage = () => {
   return (
     <div>
@@ -33,29 +34,34 @@ const HomePage = () => {
             <div className=' lg:flex lg:justify-between lg:items-center mt-52 md:mt-32'>
               {/* animation  */}
               <div className='w-fit mx-auto md:mx-8'>
-                <Image src={artBoard} width={600} height={100} alt='artboard' className='object-contain relative  z-10 artboard-up-down'/>
-                <Image src={calender} width={280} height={100} alt='calender' className='object-contain w-64 relative -mt-64 ml-10 z-20 '/>
-                
-                <Image src={human} width={150} height={100} alt='human' className='object-contain relative -mt-80 z-30 human'/>
-                <Image src={line} width={300} height={100} alt='line' className='object-contain relative ml-10 w-[280px] lg:w-[460px] h-10 '/>
+                <Image src={artBoard} width={600} height={100} alt='artboard' className='object-contain relative  z-10 artboard-up-down' />
+                <Image src={calender} width={280} height={100} alt='calender' className='object-contain w-64 relative -mt-64 ml-10 z-20 ' />
+
+                <Image src={human} width={150} height={100} alt='human' className='object-contain relative -mt-80 z-30 human' />
+                <Image src={line} width={300} height={100} alt='line' className='object-contain relative ml-10 w-[280px] lg:w-[460px] h-10 ' />
 
               </div>
               {/* input field  */}
               <div className='mx-8'>
                 <h1 className='text-4xl text-center my-6'>Sign up to get updates about events right in your inbox</h1>
-                 <div className="flex flex-col md:flex-row justify-center items-center text-center">
-            <Input className='border-2 border-black h-11'/>
-            
-      <Button type="submit" variant="outline" className='text-white mt-6 md:mt-0 bg-[#0D47A1] h-11 mx-2 w-44'>
-        <CircleCheck />Get Updates
-      </Button>
-    </div>
-          
+                <div className="flex flex-col md:flex-row justify-center items-center text-center">
+                  <Input className='border-2 border-black h-11' />
+
+                  <Button type="submit" variant="outline" className='text-white mt-6 md:mt-0 bg-[#0D47A1] h-11 mx-2 w-44'>
+                    <CircleCheck />Get Updates
+                  </Button>
+                </div>
+
               </div>
 
             </div>
           </section>
         </header>
+        {/* Upcoming Events */}
+        <section className='mt-14'>
+    <h1 className='text-center text-3xl md:text-5xl text-gray-900 font-bold '>
+                Upcoming Events </h1>
+        </section>
       </main>
     </div>
   )
