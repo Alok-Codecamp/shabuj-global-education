@@ -1,0 +1,56 @@
+import { IEvent } from '@/lib/postEvent'
+import React from 'react'
+import fallbackImage from '@/assets/calender.png'
+import Link from 'next/link';
+import { CalendarDays, MapPin } from 'lucide-react';
+import Image from 'next/image';
+import { Button } from './button';
+const Card = ({event}:{event:IEvent}) => {
+    const eventStart = new Date(event.startDate);
+                const eventEnd = new Date(event.endDate);
+                console.log('console',eventStart.toLocaleTimeString())
+
+                const dateOption:Intl.DateTimeFormatOptions={
+                    day:'numeric',
+                    month:'long',
+                    year:'numeric'
+                }
+                const timeOption:Intl.DateTimeFormatOptions={
+                    hour:'numeric',
+                    minute:'numeric',
+                    hour12:true
+                }
+                const date = eventStart.toLocaleDateString(undefined,dateOption);
+                const startTime = eventStart.toLocaleTimeString(undefined,timeOption);
+                const endTime = eventEnd.toLocaleTimeString(undefined,timeOption);
+  return (
+     <div
+                className='bg-gray-200 border border-gray-300 shadow-lg max-w-xs  rounded-md'
+                >
+                    <div>
+                        <Image src={event.image??fallbackImage} alt='event image' width={340} height={100} className='rounded-md'/>
+                    </div>
+                    <div className='px-2 py-2 hover:bg-blue-700'>
+<div className=' hover:text-cyan-200 py-2 px-3'>
+                        <h1 className='text-xl'>
+                            {event.title}
+                        </h1>
+                        <h2 className='text-lg'>{event.description.slice(0,100)}...</h2>
+                        <div className='text-orange-600 mt-2 text-sm'>
+                            <div className='flex'>
+                          <MapPin />  <span className='mx-2'>venue:{event.location}</span>
+                        </div>
+                        <div className=' flex mt-2 text-sm'>
+                            <CalendarDays size={16}/><span className='mx-2'>{date}, {startTime}-{endTime}</span>
+                        </div>
+                        </div>
+                    </div>
+                    <Button variant='outline' className='w-full hover:text-blue-700'>
+                        <Link href="#">View Event Details</Link>
+                    </Button>
+                    </div>
+                </div>
+  )
+}
+
+export default Card

@@ -14,7 +14,7 @@ const photoUploader = async(file:File)=>{
     })
     if(!res.ok){
         const errorText = await res.text();
-        throw new Error('image upload faild')
+        throw new Error(errorText)
     }
     return (await res.json()) as{
         url:string,

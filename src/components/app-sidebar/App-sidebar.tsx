@@ -3,26 +3,20 @@
 import * as React from "react"
 import {
   AudioWaveform,
-  BookOpen,
-  Bot,
+  
   Command,
-  Frame,
+  
   GalleryVerticalEnd,
-  Map,
-  PieChart,
-  Settings2,
+  
   SquareTerminal,
 } from "lucide-react"
 
 import { NavMain } from "@/components/nav-main/NavMain"
-import { NavProjects } from "@/components/nav-projects/NavProjects"
 import { NavUser } from "@/components/nav-user/NavUser"
-import { TeamSwitcher } from "@/components/team-switcher/TeamSwitcher"
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
-  SidebarHeader,
   SidebarRail,
 } from "@/components/ui/sidebar"
 

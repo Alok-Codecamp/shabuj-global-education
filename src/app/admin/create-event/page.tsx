@@ -15,6 +15,7 @@ import { Input } from "@/components/ui/input"
 import { useForm } from 'react-hook-form'
 import photoUploader from '@/lib/uploadInCloudinary'
 import postEvent from '@/lib/postEvent'
+import { toast } from 'sonner'
 
 
 const formSchema = z.object({
@@ -46,7 +47,7 @@ const formSchema = z.object({
   }),
   image:z.any().refine(files => files.length>0,{message:'image is required!'})
 })
-const page = () => {
+const Page = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -61,18 +62,28 @@ const page = () => {
   })
   async function onSubmit(data: z.infer<typeof formSchema>) {
     const myImage = data.image[0];
-    const photoString = await photoUploader(myImage);
-    
-    const payload = {...data,image:photoString.url};
+    try{
+      const photoString = await photoUploader(myImage);
+    const startDateIso = new Date(data.startDate).toISOString()
+    const endDateIso = new Date(data.endDate).toISOString()
+    const payload = {...data,image:photoString.url,startDate:startDateIso,endDate:endDateIso};
     const res = await postEvent(payload)
     console.log(res);
+    if(res){
+      toast('Event created successfully')
+    }
+    form.reset();
+    }catch(error){
+      console.log(error)
+      toast('event creatinon faild')
+    }
   }
 
   
   return (
     <div className='mx-20 bg-gray-200 rounded-xl'>
     
-<div className='mx-10 text-4xl pt-4'>
+<div className='mx-10 text-xl md:text-4xl pt-4'>
     <span className='text-blue-950'>Create</span><span className='text-black'>Event</span>
 </div>
  <div className='p-10'>
@@ -203,4 +214,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

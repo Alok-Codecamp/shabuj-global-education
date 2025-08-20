@@ -8,6 +8,8 @@ import line from '@/assets/line.png'
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import { CircleCheck } from 'lucide-react';
+import UpcomingEvents from '../upcomingEvents/UpcomingEvents';
+import PastEvents from '../pastEvents/PastEvents';
 
 const HomePage = () => {
   return (
@@ -58,9 +60,22 @@ const HomePage = () => {
           </section>
         </header>
         {/* Upcoming Events */}
-        <section className='mt-14'>
-    <h1 className='text-center text-3xl md:text-5xl text-gray-900 font-bold '>
-                Upcoming Events </h1>
+        <section className='mt-14 mb-14'>
+          <h1 className='text-center text-3xl md:text-5xl text-gray-900 font-bold '>
+            Upcoming Events 
+          </h1>
+
+          <UpcomingEvents />
+        </section>
+        {/* past events  */}
+        <section>
+          <h1 className='text-center text-3xl md:text-5xl text-gray-900 font-bold '>
+            Past Events 
+          </h1>
+          <h4 className='text-center w-fit max-w-3xl mx-auto my-12'>
+            Our core belief is to ensure that our students receive comprehensive education and guidance at every stage of their study abroad journey. Presented below are a few of our previous international educational events.
+          </h4>
+<PastEvents/>
         </section>
       </main>
     </div>
