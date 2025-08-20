@@ -1,42 +1,23 @@
-"use client"
 import { Button } from '@/components/ui/button';
 import fallbackImage from '@/assets/calender.png'
 import getEvents from '@/lib/getEvents';
+import { IEvent } from '@/lib/postEvent';
 import { CalendarDays, MapPin } from 'lucide-react';
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react'
-import deleteEvent from '@/lib/deleteEvent';
-import { toast } from 'sonner';
-import { IGetEvent } from '@/types/eventType';
 import Link from 'next/link';
+import React from 'react'
 
-const Page = () => {
-      const [events,setEvents] = useState<IGetEvent[]>([])
-       useEffect(() => {
-    const fetchEvents = async () => {
-      const allEvents = await getEvents();
-      const now = new Date();
-      const past = allEvents.filter((event: IGetEvent) => new Date(event.startDate)> now);
-      setEvents(past);
-    };
-    fetchEvents();
-  }, []);
-
-    const handleDelete = async (id: string) => {
-  const res = await deleteEvent(id);
-  console.log(res);
-  if (res.deletedCount === 1 || res.success) {
-    toast('Event deleted')
-    setEvents(prev => prev.filter(e => e._id !== id));
-  } else {
-    toast('Failed to delete.');
-  }
-};
-
+const Page = async() => {
+      const events = await getEvents()
+    const now = new Date();
+    const pastEvent = events.filter((event:IEvent)=>{ 
+        const start = new Date(event.startDate);
+        return start.getTime()< now.getTime()
+    })
   return (
-    <div className='mx-12 grid grid-cols-3 gap-6'>
+    <div className='mx-12'>
         {
-            events?.map((event:IGetEvent,idx:number)=>{
+            pastEvent?.map((event:IEvent,idx:number)=>{
                  const eventStart = new Date(event.startDate);
                 const eventEnd = new Date(event.endDate);
                 console.log('console',eventStart.toLocaleTimeString())
@@ -78,12 +59,10 @@ const Page = () => {
                         </div>
                     </div>
                     <div className='flex justify-between items-center'>
-<Link href={`/admin/update-event/${event._id}`}>
 <Button variant='outline' className=' hover:text-blue-700'>
                         Update Event
                     </Button>
-</Link>
-<Button onClick={()=>handleDelete(event._id)} variant='outline' className=' hover:text-blue-700'>
+<Button variant='outline' className=' hover:text-blue-700'>
                         Delete Event
                     </Button>
                     </div>

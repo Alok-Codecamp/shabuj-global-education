@@ -8,12 +8,11 @@ const UpcomingEvents = async() => {
      const now = new Date();
        const upcomingEvent = events.filter((event:IEvent)=>{ 
            const start = new Date(event.startDate);
-         return start.getTime()>= now.getTime()
+         return start>= now;
        })
-    
-    console.log(now.getTime());
+
   return (
-    <div className='mx-12'>
+    <div className='mx-12 grid grid-cols-3 gap-4'>
         {
             upcomingEvent?.map((event:IEvent,idx:number)=>(
                 <div key={idx}>

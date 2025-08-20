@@ -16,8 +16,8 @@ const Page = () => {
     const fetchEvents = async () => {
       const allEvents = await getEvents();
       const now = new Date();
-      const past = allEvents.filter((event: IGetEvent) => new Date(event.startDate)> now);
-      setEvents(past);
+      const onGoing = allEvents.filter((event: IGetEvent) => new Date(event.startDate)<= now && new Date(event.endDate)>=now);
+      setEvents(onGoing);
     };
     fetchEvents();
   }, []);
@@ -51,7 +51,8 @@ const Page = () => {
                     minute:'numeric',
                     hour12:true
                 }
-                const date = eventStart.toLocaleDateString(undefined,dateOption);
+                const startDate = eventStart.toLocaleDateString(undefined,dateOption);
+                const endDate = eventEnd.toLocaleDateString(undefined,dateOption);
                 const startTime = eventStart.toLocaleTimeString(undefined,timeOption);
                 const endTime = eventEnd.toLocaleTimeString(undefined,timeOption);
               return(
@@ -73,7 +74,7 @@ const Page = () => {
                           <MapPin />  <span className='mx-2'>venue:{event.location}</span>
                         </div>
                         <div className=' flex mt-2 text-sm'>
-                            <CalendarDays size={16}/><span className='mx-2'>{date}, {startTime}-{endTime}</span>
+                            <CalendarDays size={16}/><span className='mx-2'>{startDate}, {startTime}-{endDate},{endTime}</span>
                         </div>
                         </div>
                     </div>

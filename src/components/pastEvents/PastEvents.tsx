@@ -7,13 +7,13 @@ const PastEvents = async() => {
     const events = await getEvents()
     const now = new Date();
     const pastEvent = events.filter((event:IEvent)=>{ 
-        const start = new Date(event.startDate);
-        return start.getTime()< now.getTime()
+        const end = new Date(event.endDate);
+        return end< now
     })
     
     
   return (
-    <div className='mx-12'>
+    <div className='mx-12 grid grid-cols-3 gap-4'>
         {
             pastEvent?.map((event:IEvent,idx:number)=>
                 (

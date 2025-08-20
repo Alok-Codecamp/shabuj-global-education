@@ -35,7 +35,7 @@ export async function POST(request:Request) {
       startDate: new Date(data.startDate),
       endDate: new Date(data.endDate),
       location: data.location,
-      image: data.image, // Cloudinary URL
+      image: data.image, 
       createdAt: new Date(),
     };
         const events = await eventsCollection.insertOne(newEvent);
@@ -57,3 +57,4 @@ export async function POST(request:Request) {
         })
     }
 }
+
