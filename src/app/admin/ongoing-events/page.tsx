@@ -1,23 +1,42 @@
+"use client"
 import { Button } from '@/components/ui/button';
 import fallbackImage from '@/assets/calender.png'
 import getEvents from '@/lib/getEvents';
-import { IEvent } from '@/lib/postEvent';
 import { CalendarDays, MapPin } from 'lucide-react';
 import Image from 'next/image';
+import React, { useEffect, useState } from 'react'
+import deleteEvent from '@/lib/deleteEvent';
+import { toast } from 'sonner';
+import { IGetEvent } from '@/types/eventType';
 import Link from 'next/link';
-import React from 'react'
 
-const Page = async() => {
-      const events = await getEvents()
-    const now = new Date();
-    const pastEvent = events.filter((event:IEvent)=>{ 
-        const start = new Date(event.startDate);
-        return start.getTime()< now.getTime()
-    })
+const Page = () => {
+      const [events,setEvents] = useState<IGetEvent[]>([])
+       useEffect(() => {
+    const fetchEvents = async () => {
+      const allEvents = await getEvents();
+      const now = new Date();
+      const past = allEvents.filter((event: IGetEvent) => new Date(event.startDate).getTime()< now.getTime() && new Date(event.endDate).getTime()>now.getTime());
+      setEvents(past);
+    };
+    fetchEvents();
+  }, []);
+
+    const handleDelete = async (id: string) => {
+  const res = await deleteEvent(id);
+  console.log(res);
+  if (res.deletedCount === 1 || res.success) {
+    toast('Event deleted')
+    setEvents(prev => prev.filter(e => e._id !== id));
+  } else {
+    toast('Failed to delete.');
+  }
+};
+
   return (
-    <div className='mx-12'>
+    <div className='mx-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
         {
-            pastEvent?.map((event:IEvent,idx:number)=>{
+          !events.length?<div className='text-5xl w-full'>No up coming event now. stay connected...</div>:  events?.map((event:IGetEvent,idx:number)=>{
                  const eventStart = new Date(event.startDate);
                 const eventEnd = new Date(event.endDate);
                 console.log('console',eventStart.toLocaleTimeString())
@@ -32,7 +51,8 @@ const Page = async() => {
                     minute:'numeric',
                     hour12:true
                 }
-                const date = eventStart.toLocaleDateString(undefined,dateOption);
+                const startDate = eventStart.toLocaleDateString(undefined,dateOption);
+                const endDate = eventStart.toLocaleDateString(undefined,dateOption);
                 const startTime = eventStart.toLocaleTimeString(undefined,timeOption);
                 const endTime = eventEnd.toLocaleTimeString(undefined,timeOption);
               return(
@@ -54,15 +74,17 @@ const Page = async() => {
                           <MapPin />  <span className='mx-2'>venue:{event.location}</span>
                         </div>
                         <div className=' flex mt-2 text-sm'>
-                            <CalendarDays size={16}/><span className='mx-2'>{date}, {startTime}-{endTime}</span>
+                            <CalendarDays size={16}/><span className='mx-2'>{startDate}, {startTime} - {endDate}, {endTime}</span>
                         </div>
                         </div>
                     </div>
                     <div className='flex justify-between items-center'>
+<Link href={`/admin/update-event/${event._id}`}>
 <Button variant='outline' className=' hover:text-blue-700'>
                         Update Event
                     </Button>
-<Button variant='outline' className=' hover:text-blue-700'>
+</Link>
+<Button onClick={()=>handleDelete(event._id)} variant='outline' className=' hover:text-blue-700'>
                         Delete Event
                     </Button>
                     </div>

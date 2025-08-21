@@ -1,11 +1,11 @@
-import { IEvent } from '@/lib/postEvent'
 import React from 'react'
 import fallbackImage from '@/assets/calender.png'
 import Link from 'next/link';
 import { CalendarDays, MapPin } from 'lucide-react';
 import Image from 'next/image';
 import { Button } from './button';
-const Card = ({ event }: { event: IEvent }) => {
+import { IGetEvent } from '@/types/eventType';
+const Card = ({ event }: { event: IGetEvent }) => {
     const eventStart = new Date(event.startDate);
     const eventEnd = new Date(event.endDate);
 
@@ -47,7 +47,7 @@ const Card = ({ event }: { event: IEvent }) => {
                     </div>
                 </div>
                 <Button variant='outline' className='w-full hover:text-blue-700'>
-                    <Link href="#">View Event Details</Link>
+                    <Link href={`/${event._id}`}>View Event Details</Link>
                 </Button>
             </div>
         </div>

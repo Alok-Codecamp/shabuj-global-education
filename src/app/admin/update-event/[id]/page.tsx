@@ -17,10 +17,9 @@ import { toast } from 'sonner'
 import { IGetEvent } from '@/types/eventType'
 import getEventById from '@/lib/getEventById'
 import updateEvent from '@/lib/updateEvent'
+import { useParams } from 'next/navigation'
 
-interface IParams {
-    params:{id:string}  
-}
+
 
 const formSchema = z.object({
   title: z.string().min(5, {
@@ -39,8 +38,9 @@ const formSchema = z.object({
 })
 
 // main start here 
-const Page = ({params}:IParams) => {
-    
+const Page = () => {
+  const params = useParams();
+    const {id} = params;
     const [events,setEvents] = useState<IGetEvent>()
    
     
@@ -58,8 +58,8 @@ const Page = ({params}:IParams) => {
   })
    useEffect(() => {
     const fetchEvents = async () => {
-      const id = await params.id;
-    const event = await getEventById(id);
+      
+    const event = await getEventById(id as string);
     setEvents(event)
         form.reset({
       title: event.title,
@@ -72,7 +72,7 @@ const Page = ({params}:IParams) => {
     };
     fetchEvents();
 
-  }, [form]);
+  }, [id,form]);
 
   async function onSubmit(data: z.infer<typeof formSchema>) {
     // const myImage = data.image[0];

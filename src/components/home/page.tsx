@@ -68,7 +68,7 @@ const HomePage = async() => {
                     </div>
                 </div>
                 <Button variant='outline' className='w-full hover:text-blue-700'>
-                    <Link href="#">View Event Details</Link>
+                    <Link href={`/${onGoing._id}`}>View Event Details</Link>
                 </Button>
             </div>
         </div>

@@ -16,7 +16,7 @@ const Page = () => {
     const fetchEvents = async () => {
       const allEvents = await getEvents();
       const now = new Date();
-      const onGoing = allEvents.filter((event: IGetEvent) => new Date(event.startDate)<= now && new Date(event.endDate)>=now);
+      const onGoing = allEvents.filter((event: IGetEvent) => new Date(event.endDate).getTime()<= now.getTime());
       setEvents(onGoing);
     };
     fetchEvents();
@@ -34,9 +34,9 @@ const Page = () => {
 };
 
   return (
-    <div className='mx-12 grid grid-cols-3 gap-6'>
+    <div className='mx-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
         {
-            events?.map((event:IGetEvent,idx:number)=>{
+           !events.length?<div className='text-5xl w-full'>No up coming event now. stay connected...</div>: events?.map((event:IGetEvent,idx:number)=>{
                  const eventStart = new Date(event.startDate);
                 const eventEnd = new Date(event.endDate);
                 console.log('console',eventStart.toLocaleTimeString())

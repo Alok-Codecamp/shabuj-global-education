@@ -1,4 +1,5 @@
 import HomePage from "@/components/home/page";
+import Footer from "@/components/shared/Footer";
 import { Metadata } from "next";
 
 export const metadata:Metadata={
@@ -17,6 +18,7 @@ export default function Home() {
   return (
     <div>
       <HomePage/>
+      <Footer/>
     </div>
   );
 }

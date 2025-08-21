@@ -3,7 +3,7 @@ import { ObjectId } from "mongodb";
 import { NextResponse } from "next/server";
 
 // function for delete event  
-export async function DELETE(request: Request, { params }: { params: { id: string } }) {
+export async function DELETE(request: Request, { params }: any) {
   const { id } = params;
         const client = await clientPromise;
         const db =  client.db('database1')
@@ -13,8 +13,8 @@ export async function DELETE(request: Request, { params }: { params: { id: strin
 }
 
 // function for get event by id 
-export async function GET(request: Request, { params }: { params: { id: string } }) {
-  const { id } = await params;
+export async function GET(request: Request, { params }: any) {
+  const { id } = params;
         const client = await clientPromise;
         const db =  client.db('database1')
         const eventsCollection = db.collection("events");
@@ -28,8 +28,9 @@ export async function GET(request: Request, { params }: { params: { id: string }
 }
 
 // function for update 
-export async function PUT(request: Request, { params }: { params: { id: string } }) {
-  const { id } = await params;
+export async function PUT(  request: Request,
+  {params}:any) {
+  const { id } = params;
   const data = await request.json();
         const client = await clientPromise;
         const db =  client.db('database1')
