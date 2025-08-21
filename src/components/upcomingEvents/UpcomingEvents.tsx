@@ -7,15 +7,12 @@ const UpcomingEvents = async() => {
     const events = await getEvents()
 
      const now = new Date();
-       const upcomingEvent = events.filter((event:IEvent)=>{ 
-           const start = new Date(event.startDate);
-         return start>= now;
-       })
+const upcoming = events.filter((event: IGetEvent) => new Date(event.startDate).getTime()> now.getTime());
 
   return (
     <div className='mx-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
         {
-            upcomingEvent?.map((event:IGetEvent,idx:number)=>(
+            upcoming?.map((event:IGetEvent,idx:number)=>(
                 <div key={idx}>
                     <Card event={event}/>
                 </div>
